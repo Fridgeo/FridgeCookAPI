@@ -20,6 +20,7 @@ export class PrismaService extends PrismaClient implements OnModuleInit, OnModul
   async onModuleInit() {
     // Cette ligne est cruciale : elle teste la connexion au démarrage
     try {
+      console.log('Connexion à la base de données en cours...');
       await this.$connect();
     } catch (error) {
       console.error('Échec de la connexion à la base de données:', error);

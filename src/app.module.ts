@@ -6,4 +6,4 @@ import { RecetteModule } from './recette/recette.module';
   controllers: [],
   providers: [PrismaService],
 })
-export class AppModule {}
+export class AppModule { }
