@@ -1,13 +1,14 @@
 services:
   db:
     image: postgres:alpine
-    container_name: fridgeo-db
+    container_name: fridgecook_db
     environment:
       POSTGRES_USER: prisma
       POSTGRES_PASSWORD: sauvage
       POSTGRES_DB: bdd-Fridgeo
     ports:
       - "54321:5432"
+      
     volumes:
       - postgres_data:/var/lib/postgresql/data
 
