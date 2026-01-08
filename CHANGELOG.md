@@ -1,5 +1,32 @@
 # Changelog
 
+## [1.1.0](https://github.com/Fridgeo/FridgeCookAPI/compare/v1.0.0...v1.1.0) (2026-01-08)
+
+
+### Features
+
+* add ingredients and diets management with CRUD operations ([8a15c6f](https://github.com/Fridgeo/FridgeCookAPI/commit/8a15c6f7f15a66c640c32d07d5b99eb228108bc7))
+* ajouter la documentation de l'API FridgeCook ([0406227](https://github.com/Fridgeo/FridgeCookAPI/commit/0406227184539647eae71a654e89b2ebb68fd993))
+* ajouter la table User dans la base de données ([2764da6](https://github.com/Fridgeo/FridgeCookAPI/commit/2764da6d96bade6d3241eef3de1f4bef597d9564))
+* ajouter le fichier de configuration pour PM2 ([4b5b85d](https://github.com/Fridgeo/FridgeCookAPI/commit/4b5b85d829202e53d90663c243d209ac48482218))
+* ajouter le fichier docker-compose.yml pour la configuration de la base de données ([59b444f](https://github.com/Fridgeo/FridgeCookAPI/commit/59b444fecdb7c0bca64b68387b86c3ffa4212a26))
+* ajouter le fichier migration_lock.toml pour la gestion des migrations ([b77921f](https://github.com/Fridgeo/FridgeCookAPI/commit/b77921f78589b881bc7816010171ac5518f9c8e3))
+* ajouter le modèle User dans le schéma Prisma ([cdf1a2c](https://github.com/Fridgeo/FridgeCookAPI/commit/cdf1a2c503cb8972e5193f7377299754c167a1f6))
+* ajouter le module Recette dans AppModule ([02df093](https://github.com/Fridgeo/FridgeCookAPI/commit/02df0938a50bf065658120abd0727eca0d9e33dc))
+* ajouter les dépendances Prisma pour la gestion de la base de données ([efe9c1c](https://github.com/Fridgeo/FridgeCookAPI/commit/efe9c1cd4e4e567d894e76f8ce1377a18bc0c0bf))
+* ajouter les interfaces TranslatableString et Step pour gérer le contenu multilingue ([3eab801](https://github.com/Fridgeo/FridgeCookAPI/commit/3eab8014075bc31e4187411e00d82b2f01b37cfb))
+* ajouter un fichier .env.example pour la configuration de la base de données ([e451bc5](https://github.com/Fridgeo/FridgeCookAPI/commit/e451bc524e2fb4a538d6dd352c5918a798194909))
+* ajouter un script pour lancer Prisma Studio ([bbf3674](https://github.com/Fridgeo/FridgeCookAPI/commit/bbf3674749ef4bdb2139d8d23a0261430d694a53))
+* mettre à jour les dépendances pour inclure @nestjs/swagger et @scalar/nestjs-api-reference ([b5c438b](https://github.com/Fridgeo/FridgeCookAPI/commit/b5c438b547b98c71dae5d03c651635ff4a924d92))
+
+
+### Bug Fixes
+
+* corriger l'espacement dans AppModule et ajouter un message de connexion dans PrismaService ([241abd3](https://github.com/Fridgeo/FridgeCookAPI/commit/241abd3efe61a3f9bd49510166ae8b6d940fb9e2))
+* corriger le chemin d'importation de PrismaClient dans prisma.service.ts ([51b28d4](https://github.com/Fridgeo/FridgeCookAPI/commit/51b28d49972208ac71857c3e509d002461b86725))
+* corriger le nom du conteneur de la base de données dans docker-compose.yml ([f194130](https://github.com/Fridgeo/FridgeCookAPI/commit/f194130ce9ade8fd745f3833ed47f3f730ce143b))
+* supprimer une ligne vide dans docker-compose.yml ([75fbcda](https://github.com/Fridgeo/FridgeCookAPI/commit/75fbcda9aa91655630bff9ea133ee479454a27b0))
+
 ## 1.0.0 (2026-01-08)
 
 
