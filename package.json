@@ -17,7 +17,8 @@
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --config ./test/jest-e2e.json"
+    "test:e2e": "jest --config ./test/jest-e2e.json",
+    "seed:ai": "ts-node src/scripts/seed-with-ai.ts"
   },
   "dependencies": {
     "@nestjs/common": "^11.0.1",
@@ -27,6 +28,7 @@
     "@prisma/adapter-pg": "^7.2.0",
     "@prisma/client": "^7.2.0",
     "@scalar/nestjs-api-reference": "^1.0.15",
+    "axios": "^1.13.2",
     "dotenv": "^17.2.3",
     "pg": "^8.16.3",
     "prisma": "^7.2.0",

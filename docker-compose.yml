@@ -5,7 +5,7 @@ services:
     environment:
       POSTGRES_USER: prisma
       POSTGRES_PASSWORD: sauvage
-      POSTGRES_DB: bdd-Fridgeo
+      POSTGRES_DB: bdd-FridgeCook
     ports:
       - "54321:5432"
     volumes:

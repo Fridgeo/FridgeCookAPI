@@ -14,7 +14,61 @@ datasource db {
   provider = "postgresql"
 }
 
-model User {
-    id                      Int                    @id @default(autoincrement())
-    name                    String
+model Ingredient {
+  id                String            @id @default(uuid()) @db.Uuid
+  slug              String            @unique @db.VarChar(255)
+  name              Json              @db.JsonB
+  iconUrl           String?           @db.VarChar(500)
+  createdAt         DateTime          @default(now()) @db.Timestamptz()
+  updatedAt         DateTime          @updatedAt @db.Timestamptz()
+  recipeIngredients RecipeIngredient[]
+
+  @@index([slug])
+  @@map("ingredients")
+}
+
+model Diet {
+  id        String   @id @default(uuid()) @db.Uuid
+  slug      String   @unique @db.VarChar(255)
+  name      Json     @db.JsonB
+  createdAt DateTime @default(now()) @db.Timestamptz()
+  updatedAt DateTime @updatedAt @db.Timestamptz()
+  recipes   Recipe[]
+
+  @@index([slug])
+  @@map("diets")
+}
+
+model Recipe {
+  id                String            @id @default(uuid()) @db.Uuid
+  slug              String            @unique @db.VarChar(255)
+  title             Json              @db.JsonB
+  description       Json?             @db.JsonB
+  steps             Json              @db.JsonB
+  prepTime          Int
+  cookingTime       Int
+  servings          Int
+  difficulty        Int
+  createdAt         DateTime          @default(now()) @db.Timestamptz()
+  updatedAt         DateTime          @updatedAt @db.Timestamptz()
+  recipeIngredients RecipeIngredient[]
+  diets             Diet[]
+
+  @@index([slug])
+  @@map("recipes")
+}
+
+model RecipeIngredient {
+  id           String   @id @default(uuid()) @db.Uuid
+  recipeId     String   @db.Uuid
+  ingredientId String   @db.Uuid
+  quantity     Float
+  unit         String   @db.VarChar(50)
+  createdAt    DateTime @default(now()) @db.Timestamptz()
+  updatedAt    DateTime @updatedAt @db.Timestamptz()
+  recipe       Recipe   @relation(fields: [recipeId], references: [id], onDelete: Cascade)
+  ingredient   Ingredient @relation(fields: [ingredientId], references: [id])
+
+  @@unique([recipeId, ingredientId])
+  @@map("recipe_ingredients")
 }
