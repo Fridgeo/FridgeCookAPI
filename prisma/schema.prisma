@@ -1,12 +1,6 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
-  provider = "prisma-client"
-  output   = "../generated/prisma"
+  provider     = "prisma-client"
+  output       = "../generated/prisma"
   moduleFormat = "cjs"
 }
 
@@ -14,61 +8,11 @@ datasource db {
   provider = "postgresql"
 }
 
-model Ingredient {
-  id                String            @id @default(uuid()) @db.Uuid
-  slug              String            @unique @db.VarChar(255)
-  name              Json              @db.JsonB
-  iconUrl           String?           @db.VarChar(500)
-  createdAt         DateTime          @default(now()) @db.Timestamptz()
-  updatedAt         DateTime          @updatedAt @db.Timestamptz()
-  recipeIngredients RecipeIngredient[]
+model cache_recettes {
+  id          Int       @id @default(autoincrement())
+  search_key  Json
+  recipe_data Json
+  created_at  DateTime? @default(now()) @db.Timestamp(6)
 
-  @@index([slug])
-  @@map("ingredients")
-}
-
-model Diet {
-  id        String   @id @default(uuid()) @db.Uuid
-  slug      String   @unique @db.VarChar(255)
-  name      Json     @db.JsonB
-  createdAt DateTime @default(now()) @db.Timestamptz()
-  updatedAt DateTime @updatedAt @db.Timestamptz()
-  recipes   Recipe[]
-
-  @@index([slug])
-  @@map("diets")
-}
-
-model Recipe {
-  id                String            @id @default(uuid()) @db.Uuid
-  slug              String            @unique @db.VarChar(255)
-  title             Json              @db.JsonB
-  description       Json?             @db.JsonB
-  steps             Json              @db.JsonB
-  prepTime          Int
-  cookingTime       Int
-  servings          Int
-  difficulty        Int
-  createdAt         DateTime          @default(now()) @db.Timestamptz()
-  updatedAt         DateTime          @updatedAt @db.Timestamptz()
-  recipeIngredients RecipeIngredient[]
-  diets             Diet[]
-
-  @@index([slug])
-  @@map("recipes")
-}
-
-model RecipeIngredient {
-  id           String   @id @default(uuid()) @db.Uuid
-  recipeId     String   @db.Uuid
-  ingredientId String   @db.Uuid
-  quantity     Float
-  unit         String   @db.VarChar(50)
-  createdAt    DateTime @default(now()) @db.Timestamptz()
-  updatedAt    DateTime @updatedAt @db.Timestamptz()
-  recipe       Recipe   @relation(fields: [recipeId], references: [id], onDelete: Cascade)
-  ingredient   Ingredient @relation(fields: [ingredientId], references: [id])
-
-  @@unique([recipeId, ingredientId])
-  @@map("recipe_ingredients")
+  @@index([search_key], map: "idx_search_key", type: Gin)
 }
