@@ -1,24 +1,33 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { CacheService } from './cache.service';
+
+// Mock PrismaService to avoid importing the actual Prisma client
+const mockPrismaService = {
+    cache_recettes: {
+        findMany: jest.fn(),
+        findUnique: jest.fn(),
+        findFirst: jest.fn(),
+        create: jest.fn(),
+        update: jest.fn(),
+        delete: jest.fn(),
+        deleteMany: jest.fn(),
+    },
+};
+
+// Mock the prisma.service module
+jest.mock('../prisma.service', () => ({
+    PrismaService: jest.fn().mockImplementation(() => mockPrismaService),
+}));
+
 import { PrismaService } from '../prisma.service';
 
 describe('CacheService', () => {
     let service: CacheService;
-    let prisma: PrismaService;
-
-    const mockPrismaService = {
-        cache_recettes: {
-            findMany: jest.fn(),
-            findUnique: jest.fn(),
-            findFirst: jest.fn(),
-            create: jest.fn(),
-            update: jest.fn(),
-            delete: jest.fn(),
-            deleteMany: jest.fn(),
-        },
-    };
 
     beforeEach(async () => {
+        // Reset all mocks before each test
+        jest.clearAllMocks();
+
         const module: TestingModule = await Test.createTestingModule({
             providers: [
                 CacheService,
@@ -30,11 +39,6 @@ describe('CacheService', () => {
         }).compile();
 
         service = module.get<CacheService>(CacheService);
-        prisma = module.get<PrismaService>(PrismaService);
-    });
-
-    afterEach(() => {
-        jest.clearAllMocks();
     });
 
     it('should be defined', () => {

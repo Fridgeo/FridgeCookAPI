@@ -8,6 +8,7 @@ import {
     Param,
     ParseIntPipe,
     NotFoundException,
+    HttpCode,
 } from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
 import { CacheService } from './cache.service';
@@ -38,6 +39,7 @@ export class CacheController {
     }
 
     @Post('search')
+    @HttpCode(200)
     @ApiOperation({ summary: 'Search cache by search_key' })
     @ApiResponse({ status: 200, description: 'The matching cached recipe or null' })
     async search(@Body() searchDto: SearchCacheDto) {

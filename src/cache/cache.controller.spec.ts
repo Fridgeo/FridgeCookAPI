@@ -1,23 +1,35 @@
 import { Test, TestingModule } from '@nestjs/testing';
+import { NotFoundException } from '@nestjs/common';
+
+// Mock the prisma.service module first
+jest.mock('../prisma.service', () => ({
+    PrismaService: jest.fn().mockImplementation(() => ({})),
+}));
+
+// Mock the cache.service module
+const mockCacheService = {
+    findAll: jest.fn(),
+    findOne: jest.fn(),
+    findBySearchKey: jest.fn(),
+    create: jest.fn(),
+    update: jest.fn(),
+    delete: jest.fn(),
+    deleteAll: jest.fn(),
+};
+
+jest.mock('./cache.service', () => ({
+    CacheService: jest.fn().mockImplementation(() => mockCacheService),
+}));
+
 import { CacheController } from './cache.controller';
 import { CacheService } from './cache.service';
-import { NotFoundException } from '@nestjs/common';
 
 describe('CacheController', () => {
     let controller: CacheController;
-    let service: CacheService;
-
-    const mockCacheService = {
-        findAll: jest.fn(),
-        findOne: jest.fn(),
-        findBySearchKey: jest.fn(),
-        create: jest.fn(),
-        update: jest.fn(),
-        delete: jest.fn(),
-        deleteAll: jest.fn(),
-    };
 
     beforeEach(async () => {
+        jest.clearAllMocks();
+
         const module: TestingModule = await Test.createTestingModule({
             controllers: [CacheController],
             providers: [
@@ -29,11 +41,6 @@ describe('CacheController', () => {
         }).compile();
 
         controller = module.get<CacheController>(CacheController);
-        service = module.get<CacheService>(CacheService);
-    });
-
-    afterEach(() => {
-        jest.clearAllMocks();
     });
 
     it('should be defined', () => {
