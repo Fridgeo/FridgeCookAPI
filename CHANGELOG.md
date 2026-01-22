@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.2.0](https://github.com/Fridgeo/FridgeCookAPI/compare/v1.1.0...v1.2.0) (2026-01-14)
+
+
+### Features
+
+* **cache:** implement cache module with CRUD operations and search functionality ([dae9848](https://github.com/Fridgeo/FridgeCookAPI/commit/dae9848917571dfdcea38937af6b775d54f374b4))
+* **tests:** refactor cache tests and enhance mocking for PrismaService ([802622a](https://github.com/Fridgeo/FridgeCookAPI/commit/802622a21930ca64840a21eac55e84222a77b319))
+
 ## [1.1.0](https://github.com/Fridgeo/FridgeCookAPI/compare/v1.0.0...v1.1.0) (2026-01-08)
 
 
