@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.0](https://github.com/Fridgeo/FridgeCookAPI/compare/v1.2.0...v1.3.0) (2026-03-12)
+
+
+### Features
+
+* refactor cache management and enhance database configuration ([9571b38](https://github.com/Fridgeo/FridgeCookAPI/commit/9571b3899c4ee98c79b77dfb8532e9d7f9b876f3))
+
 ## [1.2.0](https://github.com/Fridgeo/FridgeCookAPI/compare/v1.1.0...v1.2.0) (2026-01-14)
 
 
