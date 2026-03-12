@@ -31,7 +31,7 @@ export class UpdateCacheDto {
 export class SearchCacheDto {
     @ApiProperty({
         description: 'Search key object to find matching cache entry',
-        example: { ingredients: ['tomate', 'oignon'], diet: 'vegetarian' },
+        example: { ingredients: ['tomate', 'oignon'] },
     })
     search_key: object;
 }

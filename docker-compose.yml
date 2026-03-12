@@ -1,13 +1,13 @@
 services:
   db:
     image: postgres:alpine
-    container_name: fridgecook_db
+    container_name: fridgecook_db_cook
     environment:
       POSTGRES_USER: prisma
       POSTGRES_PASSWORD: sauvage
       POSTGRES_DB: bdd-FridgeCook
     ports:
-      - "54321:5432"
+      - "54322:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
 

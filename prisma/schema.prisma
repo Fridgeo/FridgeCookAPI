@@ -8,6 +8,61 @@ datasource db {
   provider = "postgresql"
 }
 
+model diets {
+  id        String    @id @db.Uuid
+  slug      String    @unique @db.VarChar(255)
+  name      Json
+  createdAt DateTime  @default(now()) @db.Timestamptz(6)
+  updatedAt DateTime  @db.Timestamptz(6)
+  recipes   recipes[] @relation("DietToRecipe")
+
+  @@index([slug])
+}
+
+model ingredients {
+  id                 String               @id @db.Uuid
+  slug               String               @unique @db.VarChar(255)
+  name               Json
+  iconUrl            String?              @db.VarChar(500)
+  createdAt          DateTime             @default(now()) @db.Timestamptz(6)
+  updatedAt          DateTime             @db.Timestamptz(6)
+  recipe_ingredients recipe_ingredients[]
+
+  @@index([slug])
+}
+
+model recipe_ingredients {
+  id           String      @id @db.Uuid
+  recipeId     String      @db.Uuid
+  ingredientId String      @db.Uuid
+  quantity     Float
+  unit         String      @db.VarChar(50)
+  createdAt    DateTime    @default(now()) @db.Timestamptz(6)
+  updatedAt    DateTime    @db.Timestamptz(6)
+  ingredients  ingredients @relation(fields: [ingredientId], references: [id])
+  recipes      recipes     @relation(fields: [recipeId], references: [id], onDelete: Cascade)
+
+  @@unique([recipeId, ingredientId])
+}
+
+model recipes {
+  id                 String               @id @db.Uuid
+  slug               String               @unique @db.VarChar(255)
+  title              Json
+  description        Json?
+  steps              Json
+  prepTime           Int
+  cookingTime        Int
+  servings           Int
+  difficulty         Int
+  createdAt          DateTime             @default(now()) @db.Timestamptz(6)
+  updatedAt          DateTime             @db.Timestamptz(6)
+  recipe_ingredients recipe_ingredients[]
+  diets              diets[]              @relation("DietToRecipe")
+
+  @@index([slug])
+}
+
 model cache_recettes {
   id          Int       @id @default(autoincrement())
   search_key  Json

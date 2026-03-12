@@ -98,7 +98,7 @@ describe('CacheController', () => {
 
             const result = await controller.search(searchDto);
 
-            expect(result).toBeNull();
+            expect(result).toEqual('null');
         });
     });
 

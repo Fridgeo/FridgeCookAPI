@@ -95,6 +95,7 @@ describe('CacheService', () => {
     describe('findBySearchKey', () => {
         it('should return a cache entry matching search key', async () => {
             const searchKey = { ingredients: ['tomate', 'oignon'] };
+            const normalizedSearchKey = { ingredients: ['oignon', 'tomate'] };
             const mockCache = { id: 1, search_key: searchKey, recipe_data: { title: 'Ratatouille' }, created_at: new Date() };
             mockPrismaService.cache_recettes.findFirst.mockResolvedValue(mockCache);
 
@@ -104,7 +105,7 @@ describe('CacheService', () => {
             expect(mockPrismaService.cache_recettes.findFirst).toHaveBeenCalledWith({
                 where: {
                     search_key: {
-                        equals: searchKey,
+                        equals: normalizedSearchKey,
                     },
                 },
             });

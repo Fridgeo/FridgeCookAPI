@@ -10,10 +10,15 @@ module.exports = {
       env: {
         NODE_ENV: "development",
         PORT: 3000,
+        ENABLE_RECIPE_WEBHOOK: "true",
+        DEBUG_SEARCH: "true",
+        // RECIPE_WEBHOOK_URL: "http://fridgeo.smashballoon.lan:5678/webhook/recette",
       },
       env_production: {
         NODE_ENV: "production",
         PORT: 3000,
+        ENABLE_RECIPE_WEBHOOK: "false",
+        DEBUG_SEARCH: "false",
       }
     }
   ]
